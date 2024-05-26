@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Rancho&display=swap');
+
+.rancho-regular {
+  font-family: "Rancho", cursive;
+  font-weight: 900;
+ 
+}
+
+.font3rem{
+  font-size: 2rem;
+
+}
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;  
+  /* border: 1px solid rede; */
+}
+
+.trapezoid {
+	border-bottom: 50px solid #f00a0a;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
+	height: 0;
+	width: 125px;
+}
