@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { AuthKey } from "@/contants";
 import Link from "next/link";
@@ -8,61 +8,58 @@ import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "sonner";
 
-
-  
 const LoginPage = () => {
-  const pathHistory= localStorage.getItem('redirectAfterLoginPath')
-  const router= useRouter()
-  const handleLogin=async(e:any)=>{
-    e.preventDefault()
-    const email= e.target.email.value;
-    const password= e.target.password.value;
-   const data={
-    emailOrName:email,
-    password
-   }
-  
- 
-  
-  try {
-    const  res= await fetch(`http://localhost:7000/api/login`,{
-      method:"POST",
-      headers :{
-        'content-type' : 'Application/json'
-      },
-      body: JSON.stringify(data)
-       })
-      
-       const result = await res.json()
-  
-       console.log(result);
-  
-       if(result.success){
-        toast.success(result.message)
-  
-        localStorage.setItem(AuthKey, result.data.token)
-        router.push(pathHistory ||'/')
-        localStorage.removeItem('redirectAfterLoginPath')
+  const router = useRouter();
+  const handleLogin = async (e: any) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const data = {
+      emailOrName: email,
+      password,
+    };
 
-  
-       }
-       else{
-        toast.error(result.message)
-       }
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BECKEN_URL}/login`, {
+        method: "POST",
+        headers: {
+          "content-type": "Application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      console.log(result);
+
+      if (result.success) {
+        toast.success(result.message);
        
-    
-  } catch (error) {
-    console.log(error);
-  }
-    
-     
-    
+        //@ts-ignore
+        if (typeof window !== "undefined" && window.notifyLoginSuccess) {
+          //@ts-ignore
+          window.notifyLoginSuccess();
+          const pathHistory = localStorage.getItem("redirectAfterLoginPath");
+
+          localStorage.setItem(AuthKey, result.data.token);
+          router.push(pathHistory || "/");
+          localStorage.removeItem("redirectAfterLoginPath");
+        }
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      console.log(error);
     }
-  
+  };
+
   return (
     <section className="">
       <div className="flex flex-col items-center justify-center  bg-gray-50 pb-10  md:px-0 px-3 py-20">
-        <form onSubmit={handleLogin} className="bg-white p-6  shadow-xl w-full max-w-xl pb-20 pt-10 rounded-md  ">
+        <form
+          onSubmit={handleLogin}
+          className="bg-white p-6  shadow-xl w-full max-w-xl pb-20 pt-10 rounded-md  "
+        >
           <h1 className="text-center text-4xl my-2 font-bold rancho-regular">
             Please Login
           </h1>
@@ -127,7 +124,6 @@ const LoginPage = () => {
               <span>Sign in with Facebook</span>
             </button>
           </div>
-
         </form>
       </div>
     </section>

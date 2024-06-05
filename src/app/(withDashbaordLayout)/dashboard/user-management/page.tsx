@@ -66,7 +66,7 @@ const [AllUser , setAllUser]= useState<IUser[]>()
      
       headers :{        
         'Content-Type': 'application/json', 
-        "authorization": localStorage.getItem(`${AuthKey}`),
+        "authorization": localStorage.getItem(`${AuthKey}`) as string,
       },
       body :JSON.stringify(data)
      });
@@ -91,7 +91,7 @@ const [AllUser , setAllUser]= useState<IUser[]>()
       method:"POST",
       headers :{        
         'Content-Type': 'application/json', 
-        "authorization": localStorage.getItem(`${AuthKey}`),
+        "authorization": localStorage.getItem(`${AuthKey}`) as string,
       },
       body :JSON.stringify(data)
      });

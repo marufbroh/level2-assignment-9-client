@@ -18,13 +18,13 @@ const Dashboard = ({ children }:{children:ReactNode}) => {
           <nav className="mt-10">
            
            
-            <Link
+            {/* <Link
               href="/dashboard"
               className="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200"
             >
               <i className="material-icons">Dashboard</i>
             
-            </Link>
+            </Link> */}
             <Link
               href="/dashboard/user-management"
               className="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200"
@@ -40,19 +40,19 @@ const Dashboard = ({ children }:{children:ReactNode}) => {
             
             </Link>
             <Link
-              href="#"
+              href="/dashboard/pet-request"
               className="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200"
             >
-              <i className="material-icons">All Request</i>
+              <i className="material-icons">All Pet Request</i>
             
             </Link>
-            <Link
+            {/* <Link
               href="#"
               className="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-200"
             >
               <i className="material-icons">Password</i>
             
-            </Link>
+            </Link> */}
           </nav>
         </div>
       </aside>

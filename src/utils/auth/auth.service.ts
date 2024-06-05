@@ -1,3 +1,5 @@
+'use client'
+
 import { AuthKey } from "@/contants"
 import { decodedToken } from "./jwt"
 import { JwtPayload } from "jwt-decode"
@@ -7,28 +9,47 @@ type TUserInfo ={
   exp: Number;
 
 }
+export const getUserInfo = (): null | JwtPayload | TUserInfo => {
+    if (typeof window !== 'undefined') {
+        const authToken = localStorage.getItem(AuthKey);
+        console.log(authToken);
 
-export const getUserInfo =():null | JwtPayload |TUserInfo=>{
-    const authToken=localStorage.getItem(AuthKey)
-    console.log(authToken)
-
-
-    if(authToken){
-        const decodedData = decodedToken(authToken) as JwtPayload |TUserInfo
-        // console.log(decodedData);
-        return decodedData
+        if (authToken) {
+            const decodedData = decodedToken(authToken) as JwtPayload | TUserInfo;
+            // console.log(decodedData);
+            return decodedData;
+        }
     }
-  return null
-}
+    return null;
+};
+// export const getUserInfo =():null | JwtPayload |TUserInfo=>{
+//     const authToken=localStorage.getItem(AuthKey)
+//     console.log(authToken)
+
+
+//     if(authToken){
+//         const decodedData = decodedToken(authToken) as JwtPayload |TUserInfo
+//         // console.log(decodedData);
+//         return decodedData
+//     }
+//   return null
+// }
 
 
  export const isLoggedIn=()=>{
-    const authToken=localStorage.getItem(AuthKey)
-    if(authToken){
-        return !!authToken
+    if (typeof window !== 'undefined') {
+        const authToken = localStorage.getItem(AuthKey);
+        return !!authToken;
     }
-    return false
+    return false;
 }
+//  export const isLoggedIn=()=>{
+//     const authToken=localStorage.getItem(AuthKey)
+//     if(authToken){
+//         return !!authToken
+//     }
+//     return false
+// }
 
 export const logOut=()=>{
 

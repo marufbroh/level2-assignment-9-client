@@ -1,13 +1,13 @@
 import AvailablePets from "@/components/ui/HomePage/AvailablePets/AvailablePets";
-import Banner from "@/components/ui/HomePage/Banner/Banner";
-import SearchSystem from "@/components/ui/HomePage/SearchBar/SearchBar";
-import React from "react";
+import Review from "@/components/ui/HomePage/Review/Review";
+import Image from "next/image";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen">   
-      <SearchSystem />
+    <div className="min-h-screen">
       <AvailablePets />
+
+      <Review></Review>
     </div>
   );
 };
